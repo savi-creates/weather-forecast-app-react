@@ -1,5 +1,7 @@
 import React from "react";
 import ReactAnimatedWeather from "react-animated-weather";
+import { BeatLoader } from "react-spinners";
+
 import "./Weather.css";
 
 export default function Weather() {
@@ -16,13 +18,15 @@ export default function Weather() {
         <button className="btn search-button">Search</button>
       </div>
 
+      <BeatLoader color="#f65282" loading={true} size={15} />
+
       <div className="d-flex justify-content-between align-items-center mb-4 px-3">
         <div>
           <h2 className="fw-bold">Lisbon</h2>
           <p className=" mb-1">Tuesday 09:46, few clouds</p>
           <p>
-            Humidity: <span className=" fw-bold">77%</span> {""}; Wind:{" "}
-            <span className=" fw-bold">9.39km/h</span>
+            Humidity: <span className="fw-bold humidity-color">77%</span> {""};
+            Wind: <span className="fw-bold">9.39km/h</span>
           </p>
         </div>
 
