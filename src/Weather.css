@@ -1,0 +1,21 @@
+.Weather {
+  background-color: white;
+  border-radius: 20px;
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+.search-button {
+  background-color: #f65282 !important;
+  color: white !important;
+  font-weight: bold;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+  background-color: rgb(223, 31, 111) !important;
+}
