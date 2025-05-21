@@ -1,12 +1,11 @@
 import React from "react";
 import ReactAnimatedWeather from "react-animated-weather";
-import { BeatLoader } from "react-spinners";
 
 import "./Weather.css";
 
 export default function Weather() {
   return (
-    <div className="Weather container p-4 bg-light rounded-4 shadow-sm">
+    <div className="Weather p-4  rounded-4 shadow-sm">
       <h1 className="text-center fw-bold mb-4">Weather Forecast Engine</h1>
 
       <div className="d-flex justify-content-center mb-4">
@@ -14,30 +13,32 @@ export default function Weather() {
           type="search"
           placeholder="Search city.."
           className="form-control w-50 me-2"
+          autoFocus="on"
         />
         <button className="btn search-button">Search</button>
       </div>
 
-      <BeatLoader color="#f65282" loading={true} size={15} />
-
-      <div className="d-flex justify-content-between align-items-center mb-4 px-3">
+      <div className="d-flex justify-content-between align-items-center mb-4 px-3 weather-info">
         <div>
           <h2 className="fw-bold">Lisbon</h2>
-          <p className=" mb-1">Tuesday 09:46, few clouds</p>
+          <p className="mb-1">Tuesday 09:46, few clouds</p>
           <p>
             Humidity: <span className="fw-bold humidity-color">77%</span> {""};
-            Wind: <span className="fw-bold">9.39km/h</span>
+            Wind: <span className="fw-bold wind-color">9.39km/h</span>
           </p>
         </div>
 
-        <div className="d-flex align-items-center">
+        <div className="d-flex align-items-center ">
           <ReactAnimatedWeather
             icon="CLEAR_DAY"
             color="#000"
-            size={60}
+            size={70}
             animate={true}
           />
-          <span className="display-4 fw-bold ms-3">15ºC</span>
+          <div className="temperature ms-3">
+            <span className="temp-number">15</span>
+            <span className="temp-unit">ºC</span>
+          </div>
         </div>
       </div>
 
