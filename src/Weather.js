@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import axios from "axios";
 
 import "./Weather.css";
-
 import WeatherInfo from "./WeatherInfo";
+import Loader from "./Loader";
 
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
   const [city, setCity] = useState(props.defaultCity);
+
   function handleResponse(response) {
     setWeatherData({
       ready: true,
@@ -23,9 +24,7 @@ export default function Weather(props) {
 
   function search() {
     const apiKey = "ta4d13o783b04c3ee4a956ed2febde0f";
-
     let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
-
     axios.get(apiUrl).then(handleResponse);
   }
 
@@ -40,25 +39,27 @@ export default function Weather(props) {
 
   if (weatherData.ready) {
     return (
-      <div className="Weather p-4  rounded-4 shadow-sm">
-        <h1 className="text-center fw-bold mb-4">Weather Forecast Engine</h1>
+      <>
+        <div className="Weather p-4 rounded-4 shadow-sm">
+          <h1 className="text-center fw-bold mb-4">Weather Forecast Engine</h1>
 
-        <form onSubmit={handleSubmit}></form>
+          <form onSubmit={handleSubmit}></form>
 
-        <div className="d-flex justify-content-center mb-4">
-          <input
-            type="search"
-            placeholder="Search city.."
-            className="form-control w-50 me-2"
-            autoFocus="on"
-            onChange={handleCityChange}
-          />
-          <button className="btn search-button">Search</button>
+          <div className="d-flex justify-content-center mb-4">
+            <input
+              type="search"
+              placeholder="Search city.."
+              className="form-control w-50 me-2"
+              autoFocus="on"
+              onChange={handleCityChange}
+            />
+            <button className="btn search-button">Search</button>
+          </div>
+
+          <WeatherInfo data={weatherData} />
         </div>
 
-        <WeatherInfo data={weatherData} />
-
-        <footer className="text-center text-muted mt-4 small">
+        <footer className="text-center text-muted footer-custom mb-4 small">
           Coded by{" "}
           <a
             href="https://github.com/savi-creates"
@@ -76,10 +77,10 @@ export default function Weather(props) {
             open-sourced on GitHub
           </a>
         </footer>
-      </div>
+      </>
     );
   } else {
     search();
-    return "loading..";
+    return <Loader />;
   }
 }
