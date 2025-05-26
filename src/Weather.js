@@ -9,11 +9,33 @@ import WeatherForecast from "./WeatherForecast";
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
   const [city, setCity] = useState(props.defaultCity);
-  const [error, setError] = useState(null);
+  const [debouncedCity, setDebouncedCity] = useState(city);
 
-  const [firstLoad, setFirstLoad] = useState(true);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedCity(city);
+    }, 500);
 
-  const handleResponse = (response) => {
+    return () => clearTimeout(timer);
+  }, [city]);
+
+  useEffect(() => {
+    function search(cityToSearch) {
+      const apiKey = "ta4d13o783b04c3ee4a956ed2febde0f";
+      let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${cityToSearch}&key=${apiKey}&units=metric`;
+      axios
+        .get(apiUrl)
+        .then(handleResponse)
+        .catch(() => {
+          setWeatherData({ ready: false });
+        });
+    }
+    if (debouncedCity) {
+      search(debouncedCity);
+    }
+  }, [debouncedCity]);
+
+  function handleResponse(response) {
     setWeatherData({
       ready: true,
       coordinates: response.data.coordinates,
@@ -25,44 +47,14 @@ export default function Weather(props) {
       city: response.data.city,
       date: new Date(response.data.time * 1000),
     });
-    setError(null);
-  };
-
-  function search() {
-    const apiKey = "ta4d13o783b04c3ee4a956ed2febde0f";
-    const apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
-
-    axios
-      .get(apiUrl)
-      .then(handleResponse)
-      .catch(() => {
-        setError("Insert a valid city.");
-        setWeatherData({ ready: false });
-      });
   }
-
-  useEffect(() => {
-    if (firstLoad) {
-      search();
-      setFirstLoad(false);
-    }
-  }, [firstLoad]);
 
   function handleSubmit(event) {
     event.preventDefault();
-    search();
   }
 
   function handleCityChange(event) {
     setCity(event.target.value);
-  }
-
-  if (error) {
-    return (
-      <div className="Weather p-4 rounded-4 shadow-sm text-center">
-        <h1 className="text-danger">{error}</h1>
-      </div>
-    );
   }
 
   if (weatherData.ready) {
@@ -77,13 +69,11 @@ export default function Weather(props) {
                 type="search"
                 placeholder="Search city.."
                 className="form-control w-50 me-2"
-                autoFocus={true}
+                autoFocus
                 onChange={handleCityChange}
                 value={city}
               />
-              <button type="submit" className="btn search-button">
-                Search
-              </button>
+              <button className="btn search-button">Search</button>
             </div>
           </form>
 
