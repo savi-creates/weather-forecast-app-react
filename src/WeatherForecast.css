@@ -2,6 +2,23 @@
   text-align: center;
 }
 
+.WeatherForecast {
+  margin-top: 20px;
+}
+
+.WeatherForecast-day {
+  margin-bottom: 10px;
+}
+
+.WeatherForecast-temps {
+  font-size: 14px;
+}
+
+.WeatherForecast-temp-max {
+  font-weight: bold;
+  color: #f65282;
+}
+
 .WeatherForecast-temp-min {
   opacity: 0.6;
   margin-left: 5px;

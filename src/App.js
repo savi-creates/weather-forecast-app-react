@@ -6,7 +6,7 @@ export default function App() {
   return (
     <div className="App d-flex flex-column align-items-center">
       <div className="container">
-        <Weather defaultCity="Berlin" />
+        <Weather defaultCity="Lisbon" />
       </div>
 
       <footer className="footer text-center text-muted small mt-3 mb-3">
