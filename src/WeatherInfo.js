@@ -25,7 +25,7 @@ export default function WeatherInfo(props) {
 
         <div className="d-flex align-items-center ">
           <div>
-            <WeatherIcon code={props.data.icon} />
+            <WeatherIcon code={props.data.icon} sixe={75} />
           </div>
 
           <div className="temperature ms-3">
