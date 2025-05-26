@@ -58,25 +58,6 @@ export default function Weather(props) {
 
           <WeatherInfo data={weatherData} />
         </div>
-
-        <footer className="text-center text-muted footer-custom mb-4 small">
-          Coded by{" "}
-          <a
-            href="https://github.com/savi-creates"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Savannah Andresson
-          </a>{" "}
-          and is{" "}
-          <a
-            href="https://github.com/savi-creates/weather-forecast-app-react"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            open-sourced on GitHub
-          </a>
-        </footer>
       </>
     );
   } else {

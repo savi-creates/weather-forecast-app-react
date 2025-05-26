@@ -4,3 +4,17 @@
   align-items: center;
   justify-content: center;
 }
+
+.footer {
+  width: 100%;
+  text-align: center;
+}
+
+.footer-link {
+  color: #f65282;
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
